@@ -1,5 +1,3 @@
-let APP_ID="773D12BD-8A51-4DB6-AF33-F59D189F006C";
-
 let directCall;
 let recordingId;
 
