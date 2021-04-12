@@ -166,13 +166,13 @@ function unmuteAudio(){
 async function startScreenShare(){
   try{
     await directCall.startScreenShare();
-    directCall.onScreenSharingStopped = () => {
+    directCall.onScreenShareStopped = () => {
       console.log('screen share stopped');
     }
     document.getElementById('btnStartScreenShare').disabled = true;
     document.getElementById('btnStopScreenShare').disabled = false;
   } catch(e) {
-
+    console.error(e);
   }
 }
 
