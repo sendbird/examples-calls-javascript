@@ -21,6 +21,9 @@ function registSendBirdEventHandler(){
       console.log('Custom Items: ',call.customItems);
       document.getElementById('btnDial').disabled = true;
       registCallEvent(call);
+      if(document.getElementById('chkAutoAccept').checked){
+        callAccept();
+      }
     }
   });
 }
@@ -36,8 +39,6 @@ function registCallEvent(call){
   call.onConnected = (call) => {
     console.log("Call is Connected");
     console.log(call);
-    document.getElementById('btnLocalViewCapture').disabled = false;
-    document.getElementById('btnRemoteViewCapture').disabled = false;
   };
 
   call.onEnded = (call) => {
@@ -45,9 +46,6 @@ function registCallEvent(call){
     console.log(call);
     document.getElementById('btnDial').disabled = false;
     document.getElementById('btnAccept').disabled = false;
-
-    document.getElementById('btnLocalViewCapture').disabled = true;
-    document.getElementById('btnRemoteViewCapture').disabled = true;
   };
 
   call.onRemoteAudioSettingsChanged = (call) => {
@@ -78,10 +76,10 @@ function auth(){
         return ;
       } else {
         // regist effect sound
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../../resource/sound/Dialing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../../resource/sound/Ringing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../../resource/sound/Reconnecting.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../../resource/sound/Reconnected.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../resource/sound/Dialing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../resource/sound/Ringing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../resource/sound/Reconnecting.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../resource/sound/Reconnected.mp3');
 
         console.log('authenticated');
         console.log(user);
@@ -161,28 +159,4 @@ function muteAudio(){
 function unmuteAudio(){
   console.log(`unmute audio`);
   directCall.unmuteMicrophone();
-}
-
-async function localViewCapture(){
-  try {
-    const resultImage = await directCall.captureLocalVideoView();
-    console.log('local video view captured');
-    console.log(resultImage);
-    document.getElementById('captureResult').src = resultImage.data;
-  } catch(e) {
-    console.error('local video view capture error');
-    console.error(e);
-  }
-}
-
-async function remoteViewCapture(){
-  try {
-    const resultImage = await directCall.captureRemoteVideoView();
-    console.log('local remote view captured');
-    console.log(resultImage);
-    document.getElementById('captureResult').src = resultImage.data;
-  } catch(e) {
-    console.error('remote video view capture error');
-    console.error(e);
-  }
 }

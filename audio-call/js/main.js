@@ -65,10 +65,10 @@ function auth(){
         return ;
       } else {
         // regist effect sound
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../../resource/sound/Dialing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../../resource/sound/Ringing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../../resource/sound/Reconnecting.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../../resource/sound/Reconnected.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../resource/sound/Dialing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../resource/sound/Ringing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../resource/sound/Reconnecting.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../resource/sound/Reconnected.mp3');
 
         console.log('authenticated');
         console.log(user);

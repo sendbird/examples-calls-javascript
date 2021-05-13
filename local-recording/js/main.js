@@ -1,6 +1,37 @@
 let directCall;
+let recordingId;
 
 function init() {
+  const recordingOtion = document.getElementById('selectRecordingOption');
+
+  let option = document.createElement("option");
+  option.text = "remote(audio/video)";
+  option.value = SendBirdCall.RecordingType.REMOTE_AUDIO_AND_VIDEO;
+  recordingOtion.add(option);
+
+  option = document.createElement("option");
+  option.text = "remote(audio)";
+  option.value = SendBirdCall.RecordingType.REMOTE_AUDIO_ONLY;
+  recordingOtion.add(option);
+
+  option = document.createElement("option");
+  option.text = "local(audio) and remote(audio)";
+  option.value = SendBirdCall.RecordingType.LOCAL_REMOTE_AUDIOS;
+  recordingOtion.add(option);
+
+  option = document.createElement("option");
+  option.text = "local(audio) and remote(audio/video)";
+  option.value = SendBirdCall.RecordingType.LOCAL_AUDIO_REMOTE_AUDIO_AND_VIDEO;
+  option.defaultSelected = true;
+  recordingOtion.add(option);
+
+  option = document.createElement("option");
+  option.text = "local(audio/video) and remote(audio)";
+  option.value = SendBirdCall.RecordingType.LOCAL_AUDIO_AND_VIDEO_REMOTE_AUDIO;
+  recordingOtion.add(option);
+}
+
+function sdkInit() {
   const app_id = document.getElementById('appId').value;
   if(app_id){
     SendBirdCall.init(app_id);
@@ -13,14 +44,22 @@ function init() {
 }
 
 function registSendBirdEventHandler(){
-  let uniqueid = "unique-id";
-  SendBirdCall.addListener(uniqueid, {
+  SendBirdCall.addListener("unique-id", {
     onRinging: (call) => {
       console.log(`Call Is Ringing Call ID ==> ${call._callId}`);
       console.log('Caller Info: ', call.caller);
       console.log('Custom Items: ',call.customItems);
       document.getElementById('btnDial').disabled = true;
       registCallEvent(call);
+    }
+  });
+
+  SendBirdCall.addRecordingListener("unique-id-1", {
+    onRecordingSucceeded: (callId, recordingId, options, fileName) => {
+      console.log(`recording succeeded callid=${callId}, recordingId=${recordingId}, recordingFileName=${fileName}`);
+    },
+    onRecordingFailed: (callId, recordingId, error) => {
+      console.log(`recording failed callid=${callId}, recordingId=${recordingId}, error=${error}`);
     }
   });
 }
@@ -36,8 +75,7 @@ function registCallEvent(call){
   call.onConnected = (call) => {
     console.log("Call is Connected");
     console.log(call);
-    document.getElementById('btnStartScreenShare').disabled = false;
-    document.getElementById('btnStopScreenShare').disabled = false;
+    document.getElementById('btnStartRecording').disabled = false;
   };
 
   call.onEnded = (call) => {
@@ -45,9 +83,7 @@ function registCallEvent(call){
     console.log(call);
     document.getElementById('btnDial').disabled = false;
     document.getElementById('btnAccept').disabled = false;
-
-    document.getElementById('btnStartScreenShare').disabled = true;
-    document.getElementById('btnStopScreenShare').disabled = true;
+    document.getElementById('btnStartRecording').disabled = true;
   };
 
   call.onRemoteAudioSettingsChanged = (call) => {
@@ -65,6 +101,10 @@ function registCallEvent(call){
       console.log(`Remote Video stoped`);
     }
   };
+
+  call.onRemoteRecordingStatusChanged = (call) => {
+    console.log(`recording state = ${call.remoteRecordingStatus}`);
+  }
 }
 
 function auth(){
@@ -78,10 +118,10 @@ function auth(){
         return ;
       } else {
         // regist effect sound
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../../resource/sound/Dialing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../../resource/sound/Ringing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../../resource/sound/Reconnecting.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../../resource/sound/Reconnected.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../resource/sound/Dialing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../resource/sound/Ringing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../resource/sound/Reconnecting.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../resource/sound/Reconnected.mp3');
 
         console.log('authenticated');
         console.log(user);
@@ -163,22 +203,26 @@ function unmuteAudio(){
   directCall.unmuteMicrophone();
 }
 
-async function startScreenShare(){
-  try{
-    await directCall.startScreenShare();
-    directCall.onScreenShareStopped = () => {
-      console.log('screen share stopped');
-    }
-    document.getElementById('btnStartScreenShare').disabled = true;
-    document.getElementById('btnStopScreenShare').disabled = false;
-  } catch(e) {
-    console.error(e);
+function startRecording(){
+  const recordingOption = document.getElementById('selectRecordingOption').value;
+  let option = new SendBirdCall.DirectCallRecordOption({
+    recordingType: recordingOption,
+    callId: directCall.callId,
+    fileName: 'recording_file.mp4'
+  });
+
+  recordingId = directCall.startRecording(option);
+  if(recordingId){
+    console.log(`recording succeed recordingID = ${recordingId}`);
+    document.getElementById('btnStartRecording').disabled = true;
+    document.getElementById('btnStopRecording').disabled = false;
+  } else {
+    console.log('recording faile');
   }
 }
 
-function stopScreenShare(){
-  directCall.stopScreenShare();
-
-  document.getElementById('btnStartScreenShare').disabled = false;
-  document.getElementById('btnStopScreenShare').disabled = true;
+function stopRecording(){
+  directCall.stopRecording(recordingId);
+  document.getElementById('btnStartRecording').disabled = false;
+  document.getElementById('btnStopRecording').disabled = true;
 }

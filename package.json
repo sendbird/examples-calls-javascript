@@ -1,0 +1,31 @@
+{
+  "name": "example-calls-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server . -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sendbird/examples-calls-javascript.git"
+  },
+  "keywords": [
+    "webrtc",
+    "SendbirdCall"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sendbird/examples-calls-javascript/issues"
+  },
+  "homepage": "https://github.com/sendbird/examples-calls-javascript#readme",
+  "dependencies": {
+    "http-server": "^0.12.3",
+    "sendbird-calls": "^1.6.0"
+  }
+}

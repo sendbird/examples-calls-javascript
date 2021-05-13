@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Video Call</title>
-    <script type="text/javascript" src="../../lib/SendBirdCall.min.js"></script>
+    <title>Auto Decline</title>
+    <script type="text/javascript" src="../../node_modules/sendbird-calls/SendBirdCall.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
@@ -16,6 +16,8 @@
     <label>CALLEE ID: </label><input id='calleeId' type='text' style="width: 200px;" value="">
     <button id="btnDial" onclick="callDial()">Dial</button><br><br>
     
+    <input id="chkAutoDecline" type="checkbox" checked/>auto decline<br><br>
+    
     <button id="btnAccept" onclick="callAccept()">Accept</button>
     <button id="btnEnd" onclick="callEnd()">End</button>
     <button id="btnStartVideo" onclick="startVideo()">start video</button>
@@ -27,4 +29,10 @@
     <video id="remote_view" style="width: 45%;" playsinline autoplay controls></video>
   </body>
 </html>
+
+
+
+
+
+
 

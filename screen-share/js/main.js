@@ -36,6 +36,8 @@ function registCallEvent(call){
   call.onConnected = (call) => {
     console.log("Call is Connected");
     console.log(call);
+    document.getElementById('btnStartScreenShare').disabled = false;
+    document.getElementById('btnStopScreenShare').disabled = false;
   };
 
   call.onEnded = (call) => {
@@ -43,6 +45,9 @@ function registCallEvent(call){
     console.log(call);
     document.getElementById('btnDial').disabled = false;
     document.getElementById('btnAccept').disabled = false;
+
+    document.getElementById('btnStartScreenShare').disabled = true;
+    document.getElementById('btnStopScreenShare').disabled = true;
   };
 
   call.onRemoteAudioSettingsChanged = (call) => {
@@ -73,10 +78,10 @@ function auth(){
         return ;
       } else {
         // regist effect sound
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../../resource/sound/Dialing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../../resource/sound/Ringing.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../../resource/sound/Reconnecting.mp3');
-        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../../resource/sound/Reconnected.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.DIALING, '../resource/sound/Dialing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RINGING, '../resource/sound/Ringing.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTING, '../resource/sound/Reconnecting.mp3');
+        SendBirdCall.addDirectCallSound(SendBirdCall.SoundType.RECONNECTED, '../resource/sound/Reconnected.mp3');
 
         console.log('authenticated');
         console.log(user);
@@ -156,4 +161,24 @@ function muteAudio(){
 function unmuteAudio(){
   console.log(`unmute audio`);
   directCall.unmuteMicrophone();
+}
+
+async function startScreenShare(){
+  try{
+    await directCall.startScreenShare();
+    directCall.onScreenShareStopped = () => {
+      console.log('screen share stopped');
+    }
+    document.getElementById('btnStartScreenShare').disabled = true;
+    document.getElementById('btnStopScreenShare').disabled = false;
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+function stopScreenShare(){
+  directCall.stopScreenShare();
+
+  document.getElementById('btnStartScreenShare').disabled = false;
+  document.getElementById('btnStopScreenShare').disabled = true;
 }
