@@ -32,15 +32,11 @@ $ git clone git@github.com:sendbird/examples-calls-javascript.git
 $ cd examples-calls-javascript
 $ npm install
 ```
-3\. Build
-```shell script
-$ npm run build
-```
-4\. Start sample app
+3\. Start sample app
 ```shell script
 $ npm start
 ```
-5\. If two devices are available, repeat these steps to install the sample application on both the primary device and the secondary device.
+4\. If two devices are available, repeat these steps to install the sample application on both the primary device and the secondary device.
 
 ## Samples
 
