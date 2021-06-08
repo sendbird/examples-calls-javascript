@@ -1,3 +1,5 @@
+const { RecordingStatus } = require("sendbird-calls");
+
 let directCall;
 let recordingId;
 
@@ -103,7 +105,11 @@ function registCallEvent(call){
   };
 
   call.onRemoteRecordingStatusChanged = (call) => {
-    console.log(`recording state = ${call.remoteRecordingStatus}`);
+    if(call.remoteRecordingStatus === RecordingStatus.RECORDING){
+      console.log('The remote user has started recording');
+    } else if (call.remoteRecordingStatus == RecordingStatus.NONE){
+      console.log('The remote user has stopped recording');
+    }
   }
 }
 
