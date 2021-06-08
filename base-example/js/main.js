@@ -44,22 +44,6 @@ function registCallEvent(call){
     document.getElementById('btnDial').disabled = false;
     document.getElementById('btnAccept').disabled = false;
   };
-
-  call.onRemoteAudioSettingsChanged = (call) => {
-    if(call.isRemoteAudioEnabled){
-      console.log(`Remote Audio unmuted`);
-    } else {
-      console.log(`Remote Audio muted`);
-    }
-  };
-
-  call.onRemoteVideoSettingsChanged = (call) => {
-    if(call.isRemoteVideoEnabled){
-      console.log(`Remote Video started`);
-    } else {
-      console.log(`Remote Video stoped`);
-    }
-  };
 }
 
 function auth(){
@@ -130,24 +114,4 @@ function callAccept(){
 
 function callEnd() {
   if(directCall) directCall.end();
-}
-
-function startVideo(){
-  console.log(`start video`);
-  directCall.startVideo();
-}
-
-function stopVideo(){
-  console.log(`stop video`);
-  directCall.stopVideo();
-}
-
-function muteAudio(){
-  console.log(`mute audio`);
-  directCall.muteMicrophone();
-}
-
-function unmuteAudio(){
-  console.log(`unmute audio`);
-  directCall.unmuteMicrophone();
 }
