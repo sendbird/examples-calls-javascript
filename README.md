@@ -40,25 +40,25 @@ $ npm start
 
 ## Samples
 
-### [BaseExample](https://github.com/sendbird/examples-calls-javascript/tree/master/base-example/main.html)
+### [BaseExample](https://github.com/sendbird/examples-calls-javascript/tree/master/base-example)
 `BaseExample` The example contains simple implementation of making and receiving a DirectCall. 
 
-### [AudioOnlyCall](https://github.com/sendbird/examples-calls-javascript/tree/master/audio-call/main.html)
+### [AudioOnlyCall](https://github.com/sendbird/examples-calls-javascript/tree/master/audio-call)
 `AudioOnlyCall` The example contains simple implementation of making and receiving audio-only type call. 
 
-### [AutoAcceptCall](https://github.com/sendbird/examples-calls-javascript/tree/master/auto-accept-call/main.html)
+### [AutoAcceptCall](https://github.com/sendbird/examples-calls-javascript/tree/master/auto-accept-call)
 `AutoAcceptCall` The example contains simple implementation of auto accepting a call. 
 
-### [AutoDeclineCall](https://github.com/sendbird/examples-calls-javascript/tree/master/auto-decline-call/main.html)
+### [AutoDeclineCall](https://github.com/sendbird/examples-calls-javascript/tree/master/auto-decline-call)
 `AutoDeclineCall` The example contains simple implementation of auto declining a call. 
 
-### [LocalRecording](https://github.com/sendbird/examples-calls-javascript/tree/master/local-recording/main.html)
+### [LocalRecording](https://github.com/sendbird/examples-calls-javascript/tree/master/local-recording)
 `LocalRecording` The example contains simple implementation of local recording during a call.
 
-### [ScreenCapture](https://github.com/sendbird/examples-calls-javascript/tree/master/screen-capture/main.html)
+### [ScreenCapture](https://github.com/sendbird/examples-calls-javascript/tree/master/screen-capture)
 `ScreenCapture` The example contains an implementation of capturing local and remote video view during a call.
 
-### [ScreenShare](https://github.com/sendbird/examples-calls-javascript/tree/master/screen-share/main.html)
+### [ScreenShare](https://github.com/sendbird/examples-calls-javascript/tree/master/screen-share)
 `ScreenShare` The example contains an implementation of screen sharing during a call.
 
 ## Reference
