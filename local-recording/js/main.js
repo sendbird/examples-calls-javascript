@@ -137,8 +137,8 @@ async function callDial(){
         userId: calleeId,
         isVideoCall: true,
         callOption: {
-            localMediaView: document.getElementById('local_view'),
-            remoteMediaView: document.getElementById('remote_view'),
+            localMediaView: document.getElementById('localView'),
+            remoteMediaView: document.getElementById('remoteView'),
             audioEnabled: true,
             videoEnabled: true
         }
@@ -162,8 +162,8 @@ async function callDial(){
 function callAccept(){
   const acceptParams = {
     callOption: {
-      remoteMediaView: document.getElementById('remote_view'),
-      localMediaView: document.getElementById('local_view'),
+      remoteMediaView: document.getElementById('remoteView'),
+      localMediaView: document.getElementById('localView'),
       audioEnabled: true,
       videoEnabled: true
     }
