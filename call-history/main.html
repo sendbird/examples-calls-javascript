@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Screen Share</title>
+    <title>Video Call</title>
     <script type="text/javascript" src="../../node_modules/sendbird-calls/SendBirdCall.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </head>
@@ -17,16 +17,19 @@
     <button id="btnDial" onclick="callDial()">Dial</button><br><br>
     
     <button id="btnAccept" onclick="callAccept()">Accept</button>
-    <button id="btnEnd" onclick="callEnd()">End</button>
-    <button id="btnStartVideo" onclick="startVideo()">start video</button>
-    <button id="btnStopVideo" onclick="stopVideo()">stop video</button>
-    <button id="btnMuteAudio" onclick="muteAudio()">mute audio</button>
-    <button id="btnUnmuteAudio" onclick="unmuteAudio()">unmute audio</button><br><br>
-
+    <button id="btnEnd" onclick="callEnd()">End</button><br><br>
+    
     <video id="localView" style="width: 45%;" playsinline autoplay muted controls></video>
-    <video id="remoteView" style="width: 45%;" playsinline autoplay controls></video>
-    <button id="btnStartScreenShare" onclick="startScreenShare()" disabled>start screenshare</button>
-    <button id="btnStopScreenShare" onclick="stopScreenShare()" disabled>stop screenshare</button>
+    <video id="removeView" style="width: 45%;" playsinline autoplay controls></video><br>
+
+    <label>Call History</label>
+    <button id="btnGetCallHistory" onclick="getCallHistory()" disabled>Get Call History</button>
+    <table id="tblCallLog" style="display: inline-block; width: 100%; height: 300px; overflow-x: hidden;">
+      <tr style="vertical-align:top;">
+        <td style="width: 15%;">calltype</td><td style="width: 25%;">starttime</td><td style="width: 20%;">duration</td><td style="width: 20%;">name</td><td style="width: 20%;">direction</td>
+      </tr>
+    </table>
+    <button id="btnGetMoreCallHistory" onclick="getCallLogs()" disabled>more</button>
   </body>
 </html>
 
